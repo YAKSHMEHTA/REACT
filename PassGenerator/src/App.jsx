@@ -1,8 +1,11 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect,useRef } from "react";
 
 import "./index.css";
 
 function App() {
+
+  const data = useRef(null);
+
   const [len, setlen] = useState(8);
   const [number, setnumber] = useState(false);
   const [chars, setchars] = useState(false);
@@ -23,6 +26,12 @@ function App() {
     setpassword(pass);
   }, [len, number, chars, setpassword]);
 
+  const copytoboard = useCallback(()=>{
+    data.current?.select();
+    window.navigator.clipboard.writeText(password)
+
+  },[password])
+
   useEffect(()=>{
     passwordgenerator();
   },[len,number,chars,setpassword])
@@ -37,6 +46,7 @@ function App() {
             <div className="block w-full">
               <input
                 type="text"
+                ref={data}
                 className="outline-none w-full my-4 rounded-2xl bg-white"
                 value={password}
                 placeholder="password"
@@ -44,7 +54,9 @@ function App() {
               />
             </div>
             <div className="w-full flex justify-center">
-              <button className="bg-teal-400  cursor-pointer w-[150px]">
+              <button  onClick={
+                copytoboard
+              } className="bg-teal-400  cursor-pointer w-[150px]">
                 COPY
               </button>
             </div>
