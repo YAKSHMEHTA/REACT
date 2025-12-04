@@ -9,5 +9,5 @@ async function convertCurrency(from, to, amount) {
     console.error("Error:", err.message);
   }
 }
- dwa
+
 convertCurrency("usd", "inr", 10);
