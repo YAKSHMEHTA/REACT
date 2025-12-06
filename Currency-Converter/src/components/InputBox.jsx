@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useId } from 'react'
 
 function InputBox({
     label,
@@ -6,46 +6,51 @@ function InputBox({
     onAmountChange,
     onCurrencyChange,
     currencyOptions = [],
-    selectCurrency = 'usd',
+    selectCurrency = 'inr',
     amountDisable = false,
-    currencyDisable = true,
-    
+    currencyDisable = false,
     className = "",
 }) {
-   
 
+    const amountInputId = useId();
+    console.log('InputBox props:', { currencyOptions, selectCurrency, currencyDisable });
     return (
-        <div className={`bg-white p-3 rounded-lg text-sm flex `}>
-            <div className="w-1/2">
-                <label  className="text-black/40 mb-2 inline-block">
-                    {label}
-                </label>
-                <input
-                    
-                    className="outline-none w-full bg-transparent py-1.5"
-                    type="number"
-                    placeholder="Amount"
-                    disabled={amountDisable}
-                    value={amount}
-                    onChange={(e) => onAmountChange && onAmountChange(Number((e.target.value)))}
-                />
-            </div>
-            <div className="w-1/2 flex flex-wrap justify-end text-right">
-                <p className="text-black/40 mb-2 w-full">Currency Type</p>
-                <select
-                    value={selectCurrency}
-                    onChange={(e)=> onCurrencyChange(e.target.value)}
-                    className="rounded-lg px-1 py-1 bg-gray-100 cursor-pointer outline-none"
-                    
-                >
-                    
-                        {currencyOptions.map((currency) => (
-                            <option key={currency} value={currency}>
-                            {currency}
-                        </option>
-                        ))}
-                
-                </select>
+        <div className='flex justify-center align-center'>
+            <div className={`bg-white p-3 rounded-lg text-sm flex ${className}`}>
+                <div className="w-1/2">
+                    <label htmlFor={amountInputId} className="text-black/40 mb-2 inline-block">
+                        {label}
+                    </label>
+                    <input
+                        id={amountInputId}
+                        className="outline-none w-full bg-transparent py-1.5"
+                        type="number"
+                        placeholder="Amount"
+                        disabled={amountDisable}
+                        value={amount}
+                        onChange={(e) => onAmountChange && onAmountChange(Number(e.target.value))}
+                    />
+                </div>
+                <div className="w-1/2 flex flex-wrap justify-end text-right">
+                    <p className="text-black/40 mb-2 w-full">Currency Type</p>
+                    <select
+                        value={selectCurrency}
+                        onChange={(e) => onCurrencyChange && onCurrencyChange(e.target.value)}
+                        className="rounded-lg px-1 py-1 bg-gray-100 cursor-pointer outline-none"
+                        disabled={currencyDisable}
+                    >
+                        {currencyOptions.length > 0 ? (
+                            currencyOptions.map((currency) => (
+                                <option key={currency} value={currency}>
+                                    {currency.toUpperCase()}
+                                </option>
+                                
+                            ))
+                        ) : (
+                            <option>Loading...</option>
+                        )}
+                    </select>
+                </div>
             </div>
         </div>
     );
