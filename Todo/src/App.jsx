@@ -12,6 +12,14 @@ function App() {
     setTodos((prev) => prev.map((prevTodo) => (prevTodo.id === id ? todo :prevTodo)))
   }
 
+  const delTodo = (id) => {
+    setTodos((prev) => prev.filter((todo) => todo.id !== id ))
+  }
+
+  const toggleComp = (id) => {
+    setTodos((prev) => prev.map((prevTodo) => prevTodo.id === id ? "true" : prevTodo))
+  }
+
   return (
     <>
       <TodoProvider value={{todos,addTodo,updateTodo,delTodo,updateTodo}} >
