@@ -22,7 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-Blog-Project/src/.env
 
 # Environment
 .env
