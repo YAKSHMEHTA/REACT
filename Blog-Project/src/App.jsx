@@ -26,8 +26,8 @@ function App() {
 
   return (
     <>
-      <div className='min-h-screen flex content-between flex-wrap bg-gray-400'>
-        <div className='w-full block'>
+      <div >
+        <div >
           <Header></Header>
           <main>
             
