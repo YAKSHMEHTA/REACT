@@ -29,7 +29,6 @@ function App() {
             <div className="w-full max-w-sm mx-auto flex justify-end mb-4">
               <ThemeButton></ThemeButton>
             </div>
-
             <div className="w-full max-w-sm mx-auto">
               <Card></Card>
             </div>
